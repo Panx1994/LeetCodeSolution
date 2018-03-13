@@ -1,0 +1,22 @@
+Description:
+
+Given an array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+//Solution - 136:
+//LeetCode : Single Number
+//时间复杂度：O(n)，空间复杂度：O(1)
+//使用异或运算的性质，两个相同的数异或之后对抵
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+		int ans = 0;
+		auto it = nums.begin();
+		while(it!=nums.end())
+			ans ^= *it++;
+		return ans;
+    }
+};
