@@ -27,7 +27,7 @@ public:
 			ans[i] = ans[i-1] >0 ?
 				ans[i-1] + nums[i]
 				:nums[i];
-        max = ans[0];		
+		max = ans[0];		
 		for(int i = 1;i<nums.size();++i)
 			max = ans[i] > max ? ans[i] : max;
 		return max;
