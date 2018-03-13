@@ -1,0 +1,75 @@
+Descption:
+
+Write a program to find the node at which the intersection of two singly linked lists begins.
+
+
+For example, the following two linked lists:
+
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗            
+B:     b1 → b2 → b3
+begin to intersect at node c1.
+
+
+Notes:
+
+If the two linked lists have no intersection at all, return null.
+The linked lists must retain their original structure after the function returns.
+You may assume there are no cycles anywhere in the entire linked structure.
+Your code should preferably run in O(n) time and use only O(1) memory.
+
+
+//Solution - 160:
+//LeetCode : Majority Element
+//时间复杂度：O(n)，空间复杂度：O(1)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    /*核心的思路：
+    1.预处理，考虑头指针为空的情况
+    2.对齐两个链表，需要分别求取其长度length
+    3.根据长度差，先对齐链表
+    4.将指针相等作为判断条件，然后一起移动当前指针，最后的指向就是ans
+    */    
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+		if(!headA || !headB)
+        	return nullptr;
+		ListNode *pa = headA , *pb = headB;
+		int lena = 0 , lenb = 0 , dislen = 0;
+		while(pa) {
+			++lena;
+			pa = pa->next;
+		}
+		while(pb) {
+			++lenb;
+			pb = pb->next;
+		}
+		pa = headA;
+		pb = headB;
+		dislen = abs(lena-lenb);
+		if(lena > lenb)
+			while(dislen--)
+				pa = pa->next;
+		else if(lena < lenb)
+			while(dislen--)
+				pb = pb->next;
+		//the linked list has the same len
+		while(pa){
+			if(pa == pb)
+				break;
+			pa = pa->next;
+			pb = pb->next;
+		}
+		return pa;
+    }
+};
