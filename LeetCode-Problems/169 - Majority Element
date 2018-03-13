@@ -3,3 +3,33 @@ Description：
 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
 
 You may assume that the array is non-empty and the majority element always exist in the array.
+
+//Solution - 169:
+//LeetCode : Majority Element
+//时间复杂度：O(n)，空间复杂度：O(1)
+// tar mark the ele app most ,fre stead the frequence
+// == fre++
+// != fre--
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+		int fre = 1,tar = nums[0];
+        for(int i = 1;i<nums.size();++i) {
+			if(nums[i] == tar)
+				++fre;
+			else {
+				--fre;
+				//it means that since the first ele to the cur ele
+				//can regard as never apper
+				if(fre==0) {
+					fre = 1;
+					tar = nums[i+1];
+					// jump the i-th ele,then from the i + 2 ele
+					++i;
+				}
+			}
+		}
+		return tar;
+    }
+};
