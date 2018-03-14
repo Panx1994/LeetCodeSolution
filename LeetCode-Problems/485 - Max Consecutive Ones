@@ -12,6 +12,11 @@ Note:
 The input array will only contain 0 and 1.
 The length of input array is a positive integer and will not exceed 10,000
 
+//Solution - 485:
+//LeetCode : Max Consecutive Ones
+//时间复杂度：O(n)，空间复杂度：O(1)
+//DP问题变种：最长连续子序列的长度
+
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
