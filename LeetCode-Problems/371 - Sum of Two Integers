@@ -1,0 +1,27 @@
+Descption :
+
+Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -.
+
+Example:
+Given a = 1 and b = 2, return 3.
+
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int ans = 0 , c = 0;
+        for(int i = 0;i<32;++i)
+        {
+            int p = (a >> i) & 0x1;
+            int q = (b >> i) & 0x1;
+            int r = p^q^c;
+            c = p && q || p && c || q && c;
+            //set the ith 1 
+            if(r==1)
+                ans |= (0x1<<i);
+            //set the ith 0
+            else
+                ans &= ~(0x1<<i);
+        }
+        return ans;
+    }
+};
