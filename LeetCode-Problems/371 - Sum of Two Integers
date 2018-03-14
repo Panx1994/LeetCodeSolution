@@ -7,7 +7,12 @@ Given a = 1 and b = 2, return 3.
 
 //Solution - 371:
 //LeetCode : Sum of Two Intergers
-//时间复杂度：O(n)，空间复杂度：O(1)
+//时间复杂度：O(1)，空间复杂度：O(1)
+//计算机组成原理中的一位全加器的算法实现,根据相关的知识：
+// S = A⊕B⊕Cin
+// Cout = (A⊕B)&Cin + AB
+// 本位的进位分为两部分：AB均为1，必有进位；AB均为0，必然没有进位；
+// AB满足(A⊕B) = 1 && AB = 0，是否有进位取决于C是否为1
 
 class Solution {
 public:
@@ -18,7 +23,7 @@ public:
             int p = (a >> i) & 0x1;
             int q = (b >> i) & 0x1;
             int r = p^q^c;
-            c = p && q || p && c || q && c;
+            c = ((p ^ q) & c) | p&q;
             //set the ith 1 
             if(r==1)
                 ans |= (0x1<<i);
