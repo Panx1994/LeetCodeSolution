@@ -34,30 +34,30 @@ return its bottom-up level order traversal as:
 class Solution {
 public:
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        vector<vector<int>> myvct;
-		deque<TreeNode*> qu;
-		if(!root)
-			return myvct;
-		qu.push_back(root);
-		while(!qu.empty())
-		{
-			int size = qu.size();
-			vector<int> vct;
-			TreeNode* cur;
-			for(int i = 1;i<=size;++i)
-			{
-				cur = qu.front();
-				vct.push_back(cur->val);
-				qu.pop_front();
-				if(cur->left)
-					qu.push_back(cur->left);
-				if(cur->right)
-					qu.push_back(cur->right);
-			}
-			myvct.push_back(vct);
-		}
-		reverse(myvct.begin(),myvct.end());
+    	vector<vector<int>> myvct;
+	deque<TreeNode*> qu;
+	if(!root)
 		return myvct;
+	qu.push_back(root);
+	while(!qu.empty())
+	{
+		int size = qu.size();
+		vector<int> vct;
+		TreeNode* cur;
+		for(int i = 1;i<=size;++i)
+		{
+			cur = qu.front();
+			vct.push_back(cur->val);
+			qu.pop_front();
+			if(cur->left)
+				qu.push_back(cur->left);
+			if(cur->right)
+				qu.push_back(cur->right);
+		}
+		myvct.push_back(vct);
+	}
+	reverse(myvct.begin(),myvct.end());
+	return myvct;
     }
 };
 
