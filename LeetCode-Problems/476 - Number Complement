@@ -14,6 +14,12 @@ Input: 1
 Output: 0
 Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
 
+
+//Solution - 476:
+//LeetCode : Number Complement
+//时间复杂度：O(1)，空间复杂度：O(1)
+//二进制补码（不一定是32位），位运算得到一个大于num的数字即可得到其二进制补码
+
 class Solution {
 public:
     int findComplement(int num) {
