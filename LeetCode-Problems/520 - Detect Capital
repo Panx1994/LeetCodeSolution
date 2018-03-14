@@ -18,6 +18,12 @@ Output: False
 
 Note: The input will be a non-empty word consisting of uppercase and lowercase latin letters.
 
+//Solution - 520:
+//LeetCode : Detect Captial
+//时间复杂度：O(n)，空间复杂度：O(1)
+//基本判断题：按规定判断是否符合规定
+
+
 class Solution {
 public:
     bool detectCapitalUse(string word) {
