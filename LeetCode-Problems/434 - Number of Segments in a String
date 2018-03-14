@@ -9,3 +9,33 @@ Example:
 Input: "Hello, my name is John"
 Output: 5
 
+//Solution - 434:
+//LeetCode : Number of Segments in a string
+//时间复杂度：O(n)，空间复杂度：O(1)
+//主要是考察算法库中的find函数的基本用法
+//找string中第一个非' '的位置标志着一个segment的开始,更新string
+//找string中第一个' '的位置，标志着一个segment的结束，更新string
+
+class Solution {
+public:
+    int countSegments(string s) {
+        if(s=="")
+            return 0;
+        int len = s.length();
+        int counter = 0;
+        int pos = s.find_first_not_of(' ') ;
+        while(pos != string::npos)
+        {
+            //pos means the begin of a segemet
+            s = s.substr(pos);
+            ++counter;
+            int endmark = s.find_first_of(' ');
+            if(endmark == string::npos)
+                break;
+            s = s.substr(endmark+1);
+            pos = s.find_first_not_of(' ') ;
+        }
+        return counter;
+    }
+};
+
