@@ -12,3 +12,33 @@ Example 2:
 
 Input: 14
 Returns: False
+
+//Solution - 367:
+//LeetCode : Valid Perfect Square
+//时间复杂度：O(logn)，空间复杂度：O(1)
+//相关于二分查找的技巧题，上确界和下确界的确定需要一些技巧
+//需要注意的是，num / mid == mid 是不能单独作为判根的条件，需要加上num % mid == 0才行
+//如果num / mid == mid && num % mid != 0 则代表没有sqrt（x）没有正整数根
+//此题强相关于 sqrt（x）这道题，核心的二分查找的算法是一样的
+
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        if(num == 1)
+            return true;
+        int low = 1,high = 1<<16,mid;
+        while(low <= high)
+        {
+            mid = (low + high)/2;
+            if(low == mid)
+                break;
+            if(num / mid == mid)
+                return num % mid == 0;
+            if(num / mid > mid)
+                low = mid;
+            if(num / mid < mid)
+                high = mid;
+        }
+        return num == low * low;
+    }
+};
