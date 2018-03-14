@@ -20,3 +20,19 @@ Explanation:
 
 The above arrows point to positions where the corresponding bits are different.
 
+//Solution - 461:
+//LeetCode : Hamming Distance
+//时间复杂度：O(1)，空间复杂度：O(1)
+//Hamming distance means the different bits between two interage
+//使用位运算按位亦或即可
+
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int ans = 0;
+        for(int i = 0;i<32;++i)
+            ans += (x>>i&0x1) ^ (y>>i&0x1);
+        return ans;
+    }
+};
+
