@@ -6,4 +6,54 @@ But for multiples of three it should output “Fizz” instead of the number and
 
 For numbers which are multiples of both three and five output “FizzBuzz”.
 
+Example:
+
+n = 15,
+
+Return:
+[
+    "1",
+    "2",
+    "Fizz",
+    "4",
+    "Buzz",
+    "Fizz",
+    "7",
+    "8",
+    "Fizz",
+    "Buzz",
+    "11",
+    "Fizz",
+    "13",
+    "14",
+    "FizzBuzz"
+]
+
+
 //
+//Solution - 412:
+//LeetCode : Fizz Buzz
+//时间复杂度：O(n)，空间复杂度：O(1)
+//Point-1：将正整数转化为字符串 to_string(int n)
+//Point-2：替换规则
+
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+        vector<string> vct;
+        if(n == 0)
+            return vct;
+        for(int i = 1;i<=n;++i)
+        {
+            if(i % 3 == 0 && i % 5 == 0)
+                vct.push_back("FizzBuzz");
+            else if(i % 3 == 0)
+                vct.push_back("Fizz");
+            else if(i % 5 == 0)
+                vct.push_back("Buzz");
+            else
+                vct.push_back(to_string(i));
+        }
+        return vct;
+    }
+};
