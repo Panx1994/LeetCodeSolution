@@ -14,7 +14,10 @@ The average value of nodes on level 0 is 3,  on level 1 is 14.5, and on level 2 
 Note:
 The range of node's value is in the range of 32-bit signed integer.
 
-//
+//Solution - 637:
+//LeetCode : Average of Levels in Binary Tree
+//时间复杂度：O(n)，空间复杂度：O(1)
+//二叉树的层次遍历：每层之上的平均值
 
 /**
  * Definition for a binary tree node.
@@ -27,7 +30,6 @@ The range of node's value is in the range of 32-bit signed integer.
  */
 class Solution {
 public:
-    //二叉树的层次遍历
     vector<double> averageOfLevels(TreeNode* root) {
         deque<TreeNode*> qu;
         vector<double> vct;
