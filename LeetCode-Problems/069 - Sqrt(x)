@@ -17,3 +17,40 @@ Input: 8
 Output: 2
 Explanation: The square root of 8 is 2.82842..., and since we want to return an integer, the decimal part will be truncated!
 
+//Solution - 069:
+//LeetCode : Sqrt(x)
+//时间复杂度：O(logn)，空间复杂度：O(1)
+//相关于二分查找的技巧题，上确界和下确界的确定需要一些技巧，乘法运算的溢出问题也需要考虑
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        if(x == 0 || x == 1)
+            return x;
+        /*
+        high = x;
+        mid = (low+high)/2
+		;
+        这种方法的主要问题是，mid * mid可能一开始就越界了
+        1.一般的做法是确定x的范围
+        2.更一般的，因为x为int，high为pow(2,16)是绝对够用的,然而还是没有done
+        3.开大搞起，转换为uint，并用位操作high起来
+        4.不要做可能溢出的乘法操作，换除法上！
+        */
+        int low = 1,high = 1<<16,mid = (low+high)/2 ,ans = -1;
+        while(true)
+        {
+            mid = (low+high)/2;
+            //循环收敛，继续下去没有意义，返回相关值即可
+            if(mid == ans)
+                return ans;
+            if(x / mid == mid)
+                return mid;
+            if(x / mid > mid)
+                low = mid;
+            else if(x / mid < mid)
+                high = mid;
+            ans = mid;
+        }
+    }
+};
