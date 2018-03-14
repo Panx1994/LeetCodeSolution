@@ -16,4 +16,30 @@ Trivia:
 This problem was inspired by this original tweet by Max Howell:
 Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.
 
+//Solution - 226:
+//LeetCode : Invert Binary Tree
+//时间复杂度：O(n)，空间复杂度：O(1)
+//二叉树递归算法：当遇到空指针或者是叶节点的时候作为递归出口
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(!root)
+            return root;
+        if(!root->left && !root->right)
+            return root;
+        swap(root->left,root->right);
+        invertTree(root->left);
+        invertTree(root->right);
+        return root;
+    }
+};
