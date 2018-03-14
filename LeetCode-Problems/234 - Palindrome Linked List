@@ -5,3 +5,58 @@ Given a singly linked list, determine if it is a palindrome.
 Follow up:
 Could you do it in O(n) time and O(1) space?
 
+//Solution - 234:
+//LeetCode : Palindrome Linked List
+//时间复杂度：O(n)，空间复杂度：O(1)
+//判断单链表是否回文，需要分单链表的长度为奇偶讨论
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ 
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        int len = 0;
+        ListNode* p = head;
+        while(p)
+        {
+            len++;
+            p = p->next;
+        }
+        if(len == 0 || len == 1)	//获取链表的长度，len = 0 || len = 1时是回文单链表
+            return true;
+        p = head;
+        int midlen = len/2;
+		//当单链表长度为奇数时，相对长度为偶数需要多偏移一个位置
+        if(len%2==1)	
+            midlen++;
+        while(midlen--)
+            p = p->next;
+        //在P这里使用头插法，逆转从p开始的链表
+        ListNode * curhead = nullptr,*q;
+        while(p)
+        {
+            //取出p指向的节点作为头节点，标记为pointer q
+            q = p;
+            p = p->next;
+            q->next = curhead;
+            curhead = q;
+        }
+        p = head;
+        q = curhead;
+        while(p && q)
+        {
+            if(p->val != q->val)
+                return false;
+            p = p->next;
+            q = q->next;
+        }
+        return true;
+    }
+};
