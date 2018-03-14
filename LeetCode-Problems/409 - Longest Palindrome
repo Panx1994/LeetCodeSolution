@@ -20,3 +20,51 @@ Output:
 Explanation:
 One longest palindrome that can be built is "dccaccd", whose length is 7.
 
+//Solution - 409:
+//LeetCode : Longest Palindrome
+//时间复杂度：O(n)，空间复杂度：O(1)
+//用给定的一组字符串能够构造的最长的回文子串
+//1.区别大小写，需要分别处理
+//2.用hash思想，统计分别出现的次数，回文要求成对儿出现，最多一个signal
+//所以遍历hash表，将每个元素成对儿取出，直至剩下0或1次，在此过程中计算signal的可能性
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        vector<int> vctlow(26,0);
+        vector<int> vctupr(26,0);
+        int len = s.length();
+        if(len == 0 || len == 1)
+            return len;
+        for(int i = 0;i<len;++i)
+        {
+            if('a' <= s[i] && s[i] <= 'z')
+                vctlow[s[i] - 'a']++;
+            if('A' <= s[i] && s[i] <= 'Z')
+                vctupr[s[i] - 'A']++;
+        }
+        int ans = 0;
+        int c = 0;
+        for(int i = 0;i<26;++i)
+        {
+            if(vctlow[i]>=2)
+            {
+                ans += 2 * (vctlow[i]/2);
+                vctlow[i] %= 2;
+            }
+			//不管是取的省下一个还是本来就是一个，这个字符能提供一个signal的位置
+            if(vctlow[i] == 1)
+                c = 1;
+            if(vctupr[i]>=2)
+            {
+                ans += 2 * (vctupr[i]/2);
+                vctupr[i] %= 2;
+                if(vctupr[i] == 1)
+                    c = 1;
+            }
+            if(vctupr[i] == 1)
+                c = 1;
+        }
+        return ans + c;
+    }
+};
