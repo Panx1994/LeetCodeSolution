@@ -15,6 +15,11 @@ Output:
 [5,6]
 
 
+//Solution - 448:
+//LeetCode : Find All Numbers Disappeared in an Array
+//时间复杂度：O(n)，空间复杂度：O(n)
+//for 1 ≤ a[i] ≤ n (n = size of array)，非常适合用hash思想处理
+//一轮遍历进行hash，一轮遍历寻找那些没有被占的坑
 
 class Solution {
 public:
