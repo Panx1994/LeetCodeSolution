@@ -28,3 +28,22 @@ The coins can form the following rows:
 
 Because the 4th row is incomplete, we return 3.
 
+//Solution - 441:
+//LeetCode : Arranging Coins
+//时间复杂度：O(n)，空间复杂度：O(1)
+//要求填充按自然数序列，直到不足
+
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        if(n==0)
+            return 0;
+        int ans = 1;
+        while(n >= ans)
+        {
+            n-=ans;
+            ans++;
+        }
+        return ans-1;
+    }
+};
