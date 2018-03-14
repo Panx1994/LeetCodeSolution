@@ -10,3 +10,58 @@ Both num1 and num2 does not contain any leading zero.
 You must not use any built-in BigInteger library or convert the inputs to integer directly.
 
 
+//Solution - 415:
+//LeetCode : Add String
+//时间复杂度：O(n)，空间复杂度：O(n)
+//用string模拟大整数加法
+//逆转string，使个位对齐
+//存储两个string中的各个位加法算术运算的中间结果（可能会超过10）
+//vector中的数字按序处理分别得到个位，十位，百位等结果（可能会进位，所以vec最开始申请的时候就多申请了一个单位）
+//逆转最终结果，高位在前，处理前导0（可能会直接处理的只剩空串，注意空串补0）
+
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        reverse(num1.begin(),num1.end());
+        reverse(num2.begin(),num2.end());
+        int len1 = num1.length();
+        int len2 = num2.length();
+        int len = min(len1,len2);
+        vector<int> vct(max(len1,len2)+1,0);
+        for(int i = 0;i<len;++i)
+            vct[i] = (num1[i] - '0') + (num2[i] - '0');
+        if(len == len1)
+        {
+            while(len <len2)
+            {
+                vct[len] = num2[len] - '0'; 
+                ++len;
+            }    
+        }
+        else if(len == len2)
+        {
+            while(len <len1)
+            {
+                vct[len] = num1[len] - '0';
+                ++len;
+            }
+        }
+        len = vct.size();
+        string ans;
+        for(int i = 0;i<len;++i)
+        {
+            if(vct[i] >=10)
+            {
+                vct[i] -= 10;
+                vct[i+1] ++;
+            }
+            ans += vct[i] +'0';
+        }
+        reverse(ans.begin(),ans.end());
+        while(ans[0] == '0')
+            ans = ans.substr(1);
+        if(ans == "")
+            ans = "0";
+        return ans;
+    }
+};
