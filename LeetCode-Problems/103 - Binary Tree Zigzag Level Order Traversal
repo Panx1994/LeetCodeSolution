@@ -18,6 +18,12 @@ return its zigzag level order traversal as:
   [15,7]
 ]
 
+//Solution - 268:
+//LeetCode : Missing Number
+//时间复杂度：O(n)，空间复杂度：O(n)
+//与经典的二叉树层次遍历不同的是相邻层的次序不同，可以通过%2来模拟这种交替次序
+
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
