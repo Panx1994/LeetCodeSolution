@@ -7,3 +7,27 @@ For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,
 Note:
 Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
 
+//Solution - 189:
+//LeetCode : Rotate Array
+//时间复杂度：O(n)，空间复杂度：O(1)
+//数组的循环右移操作的核心思想：
+//分块块内逆转，然后整体逆转
+//另外的还有需要更多的空间复杂度的做法
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int len = nums.size();
+        if(len <= 0)
+            return ;
+        k = k % len;
+        if(k==0)
+            return ;
+        for(int i = 0, j = len - k - 1 ; i < j ; ++i,--j)
+            swap(nums[i],nums[j]);
+        for(int i = len - k,j = len - 1 ; i < j; ++i,--j)
+            swap(nums[i],nums[j]);
+        for(int i = 0,j=len-1;i<j;++i,--j)
+            swap(nums[i],nums[j]);
+    }
+};
