@@ -26,7 +26,14 @@ Merged tree:
    
 Note: The merging process must start from the root nodes of both trees.
 
-
+//Solution - 617:
+//LeetCode : Merge Two Binary Trees
+//时间复杂度：O(n)，空间复杂度：O(n)
+//经典二叉树带递归问题：
+//1.两个指针同时nullptr
+//2.有且仅有一个指针为nullptr
+//3.两个指针同时俊非空
+//需要注意的是，返回的指针保证了树状结构的指针指向，只需要沿袭其原始的左右方向
 
 
 /**
