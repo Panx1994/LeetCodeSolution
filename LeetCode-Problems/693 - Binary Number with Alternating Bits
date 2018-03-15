@@ -26,6 +26,12 @@ Output: True
 Explanation:
 The binary representation of 10 is: 1010.
 
+//Solution - 693:
+//LeetCode : Binary Number with Alternating Bits
+//时间复杂度：O(n)，空间复杂度：O(1)
+//要求有效的二进制表示法是01间隔的
+//这里的做法是：
+//取出最低位，向上判断01间隔的性质（当只有最低位时返回true）
 
 class Solution {
 public:
