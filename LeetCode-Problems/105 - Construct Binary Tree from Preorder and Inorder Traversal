@@ -1,0 +1,61 @@
+Descption :
+
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+For example, given
+
+preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+Return the following binary tree:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* Reconstruct(vector<int>& pre,int p1,int p2,vector<int>& inorder,int q1,int q2)
+    {
+        //在前序序列找第一个元素作为根，根据中序得知左子树的大小
+        //前序只有一个节点，作为根。然后左右子树都为null
+        if(p2<p1 || q2 <q1)
+            return nullptr;
+        TreeNode* root = new TreeNode(pre[p1]);
+        if(p2-p1 == 0)
+            return root;
+        int pos;
+        for(int i = q1;i<=q2;++i)
+            if(inorder[i] == root->val)
+                pos = i;
+        //左子树的个数为pos - q1
+        root->left = Reconstruct(pre , p1 + 1 , p1 + pos - q1 , inorder , q1 , pos - 1);
+        //右子树的个数为q2 - pos
+        root->right = Reconstruct(pre ,p1 + pos - q1 + 1 , p2 , inorder , pos + 1 , q2);
+        return root;
+    }
+    
+    
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        TreeNode* root = nullptr;
+        int lenPre = preorder.size();
+        int lenIn = inorder.size();
+        if(lenPre >0)
+            root = Reconstruct(preorder,0,lenPre-1,inorder,0,lenIn-1);
+        return root;
+    }
+};
