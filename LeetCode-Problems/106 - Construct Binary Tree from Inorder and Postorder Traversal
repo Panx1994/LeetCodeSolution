@@ -1,0 +1,59 @@
+Descption :
+
+Given inorder and postorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+For example, given
+
+inorder = [9,3,15,20,7]
+postorder = [9,15,7,20,3]
+Return the following binary tree:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+   
+   /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+    TreeNode * ReconstructTree(vector<int>& inorder ,int p1,int p2, vector<int>& postorder,int q1,int q2)
+    {
+        if(p1 > p2 || q1 > q2)
+            return nullptr;
+        TreeNode * root = new TreeNode(postorder[q2]);
+        if(p2-p1==0)
+            return root;
+        //在中序里面找根然后划分数组
+        int pos;
+        for(int i = p1;i<=p2;++i)
+            if(inorder[i] == root->val)
+                pos = i;
+        //左子树的size pos - p1;
+        root->left = ReconstructTree(inorder , p1 , pos - 1, postorder, q1, pos + q1 - p1 -1);
+        //右子树的size p2 - pos
+        root->right = ReconstructTree(inorder , pos + 1 , p2 , postorder, pos + q1 - p1, q2 - 1);
+        return root;
+    }
+    
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        int lenIn = inorder.size();
+        int lenPostorder = postorder.size();
+        if(lenIn == 0)
+            return nullptr;
+        return
+            ReconstructTree(inorder , 0, lenIn - 1 , postorder, 0 , lenPostorder - 1);
+    }
+};
