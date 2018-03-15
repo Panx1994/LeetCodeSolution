@@ -17,3 +17,60 @@ return
    [5,8,4,5]
 ]
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+    void PreTrival(TreeNode* root ,
+                   vector<int> cur, 
+                   vector<vector<int>> &ans ,
+                   int sum)
+    {
+        if(!root)
+            return;
+        if(!root->left && !root->right)
+        {
+            //MEET leaf and judge
+            cur.push_back(root->val);
+            int size = cur.size() , pathsum = 0;
+            auto it = cur.begin();
+            while(it != cur.end())
+                pathsum += *it++;
+            if(pathsum == sum)
+                ans.push_back(cur);
+            return;
+        }
+        // Need to consider the nullptr
+        cur.push_back(root->val);
+        PreTrival(root->left , cur , ans , sum);
+        PreTrival(root->right , cur , ans , sum);
+    }
+    
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<int> cur;
+        vector<vector<int>> ans;
+        if(!root)
+            return ans;
+        if(!root->left &&!root->right)
+        {
+            if(root->val == sum)
+            {
+                cur.push_back(root->val);
+                ans.push_back(cur);
+                return ans;
+            }
+            else
+                return ans;
+        }
+        PreTrival(root , cur , ans , sum);
+        return ans;
+    }
+};
