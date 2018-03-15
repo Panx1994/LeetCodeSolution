@@ -17,10 +17,14 @@ Note:
 The boundaries of each input argument are 1 <= left <= right <= 10000.
 
 
-
+//Solution - 728:
+//LeetCode : Self Dividing Numbers
+//时间复杂度：O(m-n)，空间复杂度：O(1)
+//条件判断题
 
 class Solution {
 public:
+
     bool IsSelfDivided(int num)
     {
         int cur = 0,x = num;
@@ -33,6 +37,7 @@ public:
         }
         return true;
     }
+	
     vector<int> selfDividingNumbers(int left, int right) {
         vector<int> vct;
         for(int i = left;i<=right;++i)
